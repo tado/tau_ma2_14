@@ -23,13 +23,16 @@ void ofApp::draw(){
     ofSetColor(255);
     
     // 塗りつぶしなし
-    ofNoFill();
-    
-    // パーティクルを曲線で結ぶ
+    ofNoFill();    
+
+    // メッシュに格納していた頂点情報をクリア
     mesh.clear();
+    
+    // パーティクルの位置をVBO Meshに頂点の座標として記録
     for (int i = 0; i < particles.size(); i++) {
         mesh.addVertex(ofVec3f(particles[i].position.x, particles[i].position.y, 0));
     }
+    // メッシュを描画
     mesh.draw();
     
     // ログを表示

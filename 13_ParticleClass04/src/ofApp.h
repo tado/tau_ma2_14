@@ -23,6 +23,6 @@ public:
     // パーティクルクラスをインスタンス化
     vector<Particle> particles;
     
-    // メッシュ
+    // VBO Meshを生成
     ofVboMesh mesh;
 };

@@ -29,7 +29,7 @@ void ofApp::draw(){
 
     // メッシュを点で描く
     mesh.clear();
-    ofSetColor(255);
+    ofSetColor(255, 63);
     for (int i = 0; i < particles.size(); i++) {
         mesh.addVertex(ofVec3f(particles[i].position.x, particles[i].position.y, 0));
     }
@@ -67,7 +67,7 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 400; i++) {
         Particle p;
         // 摩擦係数を設定
         p.friction = 0.001;
