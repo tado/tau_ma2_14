@@ -6,8 +6,6 @@ void Particle::update(){
     addForce(gravity);
     updateForce();
     updatePos();
-    checkBounds(0, 0, ofGetWidth(), ofGetHeight());
-    constrain(0, 0, ofGetWidth(), ofGetHeight());
 }
 
 // 描画
@@ -19,10 +17,6 @@ void Particle::draw(){
 void Particle::setInit(ofVec2f initPos){
     position.x = initPos.x;
     position.y = initPos.y;
-    float length = ofRandom(20);
-    float angle = ofRandom(PI * 2);
-    velocity.x = cos(angle) * length;
-    velocity.y = sin(angle) * length;
     force.set(0, 0);
 }
 
@@ -52,7 +46,7 @@ void Particle::checkBounds(float xmin, float ymin, float xmax, float ymax){
     if (position.x < xmin || position.x > xmax) {
         velocity.x *= -1;
     }
-    if (position.y > ymax) {
+    if (position.y < ymin || position.y > ymax) {
         velocity.y *= -1;
     }
 }
@@ -64,6 +58,9 @@ void Particle::constrain(float xmin, float ymin, float xmax, float ymax){
     }
     if (position.x > xmax) {
         position.x = xmax - (position.x - xmax);
+    }
+    if (position.y < ymin) {
+        position.y = ymin + (ymin - position.y);
     }
     if (position.y > ymax) {
         position.y = ymax - (position.y - ymax);

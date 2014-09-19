@@ -20,9 +20,6 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    // 描画する円の数を指定
-    static const int CIRCLE_NUM = 10000;
-    
     // パーティクルクラスをインスタンス化
-    Particle particle[CIRCLE_NUM];
+    vector<Particle> particles;
 };

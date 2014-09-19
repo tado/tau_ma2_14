@@ -9,8 +9,7 @@ void ofApp::setup(){
     
     for (int i = 0; i < CIRCLE_NUM; i++){
         // 摩擦係数を設定
-        particle[i].friction = 0.005;
-        // 重力を設定（下に0.25の強さ）
+        particle[i].friction = 0.002;
         particle[i].gravity.set(0, 0.25);
         // 初期位置を設定
         particle[i].setInit(ofVec2f(ofGetWidth()/2, ofGetHeight()/2));
