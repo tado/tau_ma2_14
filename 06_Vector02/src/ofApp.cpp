@@ -24,13 +24,11 @@ void ofApp::update(){
     for (int i = 0; i < CIRCLE_NUM; i++) {
         // 力をリセット
         force[i].set(0, 0);
-        
-        // 力の更新 (摩擦)
+        // 摩擦力の計算
         force[i] -= velocity[i] * friction;
-        
-        
-        // 円の座標を全て更新
+        // 力から速度を算出
         velocity[i] += force[i];
+        // 速度から位置を算出
         position[i] += velocity[i];
         
         // 画面からはみ出たらバウンドさせる

@@ -34,6 +34,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
+
     // 画面内のランダムな場所を円の数だけ描画
     for (int i = 0; i < CIRCLE_NUM; i++) {
         ofCircle(position[i], 5);
