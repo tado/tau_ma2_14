@@ -17,8 +17,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     // 円の座標を更新
-    position.x += velocity.x;
-    position.y += velocity.y;
+    position += velocity;
 
     // 画面からはみ出ないように
     if (position.x < 0 || position.x > ofGetWidth()) {
