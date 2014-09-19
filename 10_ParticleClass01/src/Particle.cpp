@@ -17,15 +17,15 @@ void Particle::draw(){
 
 // 初期設定
 void Particle::setInit(ofVec2f initPos){
+    // 位置を設定
     position.x = initPos.x;
     position.y = initPos.y;
-    force.set(0, 0);
+
     // 初期速度を設定
     float length = ofRandom(10.0);
     float angle = ofRandom(PI * 2);
     velocity.x = cos(angle) * length;
     velocity.y = sin(angle) * length;
-    force.set(0, 0);
 }
 
 // 力をリセット
