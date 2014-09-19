@@ -9,8 +9,8 @@ void ofApp::setup(){
     
     // 画面内のランダムな場所を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        posX[i] = ofRandom(ofGetWidth());
-        posY[i] = ofRandom(ofGetHeight());
+        position[i].x = ofRandom(ofGetWidth());
+        position[i].y = ofRandom(ofGetHeight());
     }
 }
 
@@ -21,10 +21,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetHexColor(0x3399cc);
+    ofSetColor(255);
     // 画面内のランダムな場所を円の数だけ描画
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        ofCircle(posX[i], posY[i], 20);
+        ofCircle(position[i].x, position[i].y, 10);
     }
 }
 

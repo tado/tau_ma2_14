@@ -20,10 +20,8 @@ public:
     void gotMessage(ofMessage msg);
     
     // 位置
-    float positionX;
-    float positionY;
+    ofVec2f position;
     
     // 速度
-    float velocityX;
-    float velocityY;
+    ofVec2f velocity;
 };

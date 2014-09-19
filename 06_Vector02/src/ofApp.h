@@ -32,5 +32,5 @@ public:
     ofVec2f force[CIRCLE_NUM];
     
     // 摩擦係数
-    float friction = 0.01;
+    float friction;
 };

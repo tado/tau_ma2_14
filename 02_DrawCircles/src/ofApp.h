@@ -23,6 +23,5 @@ public:
     static const int CIRCLE_NUM = 100;
     
     // 位置の配列を生成
-    float posX[CIRCLE_NUM];
-    float posY[CIRCLE_NUM];
+    ofVec2f position[CIRCLE_NUM];
 };

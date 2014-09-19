@@ -20,7 +20,6 @@ public:
     void gotMessage(ofMessage msg);
     
     // 円の位置
-    float posX;
-    float posY;
+    ofVec2f position;
     
 };

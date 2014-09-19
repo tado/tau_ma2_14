@@ -8,8 +8,8 @@ void ofApp::setup(){
     ofSetCircleResolution(32);
     
     // 画面内のランダムな場所を指定
-    posX = ofRandom(ofGetWidth());
-    posY = ofRandom(ofGetHeight());
+    position.x = ofRandom(ofGetWidth());
+    position.y = ofRandom(ofGetHeight());
 }
 
 //--------------------------------------------------------------
@@ -21,7 +21,7 @@ void ofApp::update(){
 void ofApp::draw(){
     // 設定した場所に円を描く
     ofSetHexColor(0x3399cc);
-    ofCircle(posX, posY, 20);
+    ofCircle(position.x, position.y, 20);
 }
 
 //--------------------------------------------------------------

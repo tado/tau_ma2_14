@@ -8,32 +8,32 @@ void ofApp::setup(){
     ofSetCircleResolution(32);
     
     // ランダムな場所と速度を指定
-    positionX = ofRandom(ofGetWidth());
-    positionY = ofRandom(ofGetHeight());
-    velocityX = ofRandom(-10, 10);
-    velocityY = ofRandom(-10, 10);
+    position.x = ofRandom(ofGetWidth());
+    position.y = ofRandom(ofGetHeight());
+    velocity.x = ofRandom(-10, 10);
+    velocity.y = ofRandom(-10, 10);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     // 円の座標を更新
-    positionX += velocityX;
-    positionY += velocityY;
+    position.x += velocity.x;
+    position.y += velocity.y;
 
     // 画面からはみ出ないように
-    if (positionX < 0 || positionX > ofGetWidth()) {
-        velocityX *= -1;
+    if (position.x < 0 || position.x > ofGetWidth()) {
+        velocity.x *= -1;
     }
-    if (positionY < 0 || positionY > ofGetHeight()) {
-        velocityY *= -1;
+    if (position.y < 0 || position.y > ofGetHeight()) {
+        velocity.y *= -1;
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetHexColor(0x3399cc);
+    ofSetColor(255);
     // 円を描画
-    ofCircle(positionX, positionY, 20);
+    ofCircle(position.x, position.y, 10);
 }
 
 //--------------------------------------------------------------

@@ -24,6 +24,7 @@ public:
     void updateForce(); // 力を更新
     void updatePos(); // 位置の更新
     void checkBounds(); // 画面からはみ出たらバウンドさせる
+    
     static const int CIRCLE_NUM = 400; // 描画する円の数を指定
     ofVec2f position[CIRCLE_NUM]; // 位置ベクトルの配列
     ofVec2f velocity[CIRCLE_NUM]; // 速度ベクトルの配列

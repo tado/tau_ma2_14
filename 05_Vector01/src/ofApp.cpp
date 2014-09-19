@@ -5,7 +5,6 @@ void ofApp::setup(){
     // 画面基本設定
     ofSetFrameRate(60);
     ofBackground(63);
-    ofSetCircleResolution(32);
     
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {

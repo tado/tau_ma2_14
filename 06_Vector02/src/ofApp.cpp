@@ -5,7 +5,6 @@ void ofApp::setup(){
     // 画面基本設定
     ofSetFrameRate(60);
     ofBackground(63);
-    ofSetCircleResolution(32);
     
     // 画面内のランダムな場所と速度を円の数だけ指定
     for (int i = 0; i < CIRCLE_NUM; i++) {
@@ -14,28 +13,27 @@ void ofApp::setup(){
         velocity[i].set(ofRandom(-10, 10), ofRandom(-10, 10));
         force[i].set(0, 0);
     }
+    
+    // 摩擦係数を設定
+    friction = 0.01;
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    // 力をリセット
+    
     for (int i = 0; i < CIRCLE_NUM; i++) {
+        // 力をリセット
         force[i].set(0, 0);
-    }
-    
-    // 力の更新 (摩擦)
-    for (int i = 0; i < CIRCLE_NUM; i++) {
+        
+        // 力の更新 (摩擦)
         force[i] -= velocity[i] * friction;
-    }
-    
-    // 円の座標を全て更新
-    for (int i = 0; i < CIRCLE_NUM; i++) {
+        
+        
+        // 円の座標を全て更新
         velocity[i] += force[i];
         position[i] += velocity[i];
-    }
-    
-    // 画面からはみ出たらバウンドさせる
-    for (int i = 0; i < CIRCLE_NUM; i++) {
+        
+        // 画面からはみ出たらバウンドさせる
         if (position[i].x < 0 || position[i].x > ofGetWidth()) {
             velocity[i].x *= -1;
         }
@@ -43,8 +41,6 @@ void ofApp::update(){
             velocity[i].y *= -1;
         }
     }
-    
-    
 }
 
 //--------------------------------------------------------------
