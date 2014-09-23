@@ -22,6 +22,8 @@ public:
     void update();
     // 画面からはみ出たらバウンドさせる
     void bounceOffWalls();
+    // 画面からはみ出たら反対側から出現
+    void throughOfWalls();
     // 描画
     void draw();
     

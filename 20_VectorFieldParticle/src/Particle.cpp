@@ -85,7 +85,25 @@ void Particle::bounceOffWalls(){
 	if (bDidICollide == true && bDampedOnCollision == true){
 		velocity *= 0.3;
 	}
-	
+}
+
+void Particle::throughOfWalls(){
+    float minx = 0;
+    float miny = 0;
+    float maxx = ofGetWidth();
+    float maxy = ofGetHeight();
+    if (position.x < minx) {
+        position.x = maxx;
+    }
+    if (position.y < miny) {
+        position.y = maxy;
+    }
+    if (position.x > maxx) {
+        position.x = minx;
+    }
+    if (position.y > maxy) {
+        position.y = miny;
+    }
 }
 
 // 描画

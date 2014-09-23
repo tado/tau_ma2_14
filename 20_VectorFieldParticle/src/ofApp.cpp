@@ -39,7 +39,7 @@ void ofApp::update(){
         //Particleの状態を更新
         particles[i].addForce(ofVec2f(force.x, force.y));
         particles[i].updateForce();
-        particles[i].bounceOffWalls();
+        particles[i].throughOfWalls();
         particles[i].update();
     }
     
