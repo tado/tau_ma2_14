@@ -2,7 +2,7 @@
 #include "ofMain.h"
 
 class Particle {
-    
+
 public:
     //コンストラクタ
     Particle();
@@ -22,13 +22,15 @@ public:
     void update();
     // 画面からはみ出たらバウンドさせる
     void bounceOffWalls();
+    // 画面からはみ出たら反対側から出現
+    void throughOfWalls();
     // 描画
     void draw();
     
     // 反発する力
     void addRepulsionForce(float x, float y, float radius, float scale);
     void addRepulsionForce(Particle &p, float radius, float scale);
-    
+
     // 引きつけあう力
     void addAttractionForce(float x, float y, float radius, float scale);
     void addAttractionForce(Particle &p, float radius, float scale);
