@@ -1,11 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "VectorField.h"
 #include "Particle.h"
 
-class ofApp : public ofSimpleApp{
-	
+class ofApp : public ofBaseApp{
+    
 public:
     void setup();
     void update();
@@ -20,15 +19,13 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-
-    // ベクターフィールド
-	VectorField VF;
-    // ベクターフィールドのモード
-	int addMode;
-    // パーティクル
-    vector <Particle> particles;
-    // VBOメッシュ
+    
+    // パーティクルクラスをインスタンス化
+    vector<Particle> particles;
+    // メッシュ
     ofVboMesh mesh;
+    // 引力が働いているか
+    bool atraction;
     // パーティクルの数
-    int particlesNum;
+    static const int NUM = 100000;
 };
