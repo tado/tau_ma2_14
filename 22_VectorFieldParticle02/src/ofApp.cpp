@@ -62,12 +62,12 @@ void ofApp::update(){
                 
             case 3:
                 //時計回り
-                VF.addClockwiseCircle(mouseX, mouseY, radius, strength);
+                VF.addClockwiseCircle(mouseX, mouseY, radius / 4.0, strength);
                 break;
                 
             case 4:
                 //反時計回り
-                VF.addCounterClockwiseCircle(mouseX, mouseY, radius, strength);
+                VF.addCounterClockwiseCircle(mouseX, mouseY, radius / 4.0, strength);
                 break;
                 
             default:
@@ -106,9 +106,11 @@ void ofApp::draw(){
     ofDrawBitmapString("key 1 - 4 : change vector mode", 20, 20);
     ofDrawBitmapString(msg, 20, 40);
     
+    /*
     //ベクトル場を描画
     ofSetColor(0,127,255, 200);
     VF.draw();
+     */
     
     //ベクトル場に配置されたparticleを描画
     ofSetColor(255);
