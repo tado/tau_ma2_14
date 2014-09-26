@@ -6,16 +6,13 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofBackground(0);
     
-    //画面の更新をOFFに
-    // ofSetBackgroundAuto(false);
-    
     // メッシュを点で描画
     mesh.setMode(OF_PRIMITIVE_POINTS);
     glPointSize(1.0);
     
     for (int i = 0; i < NUM; i++) {
         Particle p;
-        p.friction = 0.001;
+        p.friction = 0.002;
         p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
         particles.push_back(p);
     }
@@ -26,19 +23,15 @@ void ofApp::update(){
     for (int i = 0; i < particles.size(); i++){
         particles[i].resetForce();
         if (atraction) {
-            particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth() * 1.5, 0.1);
+            particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth(), 0.1);
         }
         particles[i].update();
-        particles[i].bounceOffWalls();
+        particles[i].throughOfWalls();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    // 画面をフェード
-    ofSetColor(0, 0, 0, 15);
-    ofRect(0, 0, ofGetWidth(), ofGetHeight());
-
     // メッシュを点で描く
     mesh.clear();
     ofSetColor(255);
