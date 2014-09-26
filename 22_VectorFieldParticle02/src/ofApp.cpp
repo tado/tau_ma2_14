@@ -48,7 +48,7 @@ void ofApp::update(){
     if (mousePress) {
         //モードに応じてベクトル場に力を加える
         float strength = 0.1;
-        float radius = ofGetWidth() / 2.0;
+        float radius = ofGetWidth();
         switch (addMode) {
             case 1:
                 //外向き
