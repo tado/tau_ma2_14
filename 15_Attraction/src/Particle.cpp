@@ -192,29 +192,3 @@ void Particle::addAttractionForce(Particle &p, float radius, float scale){
         p.force.y = p.force.y + diff.y * scale * pct;
     }
 }
-
-void Particle::addCounterClockwiseForce(Particle &p, float radius, float scale){
-    ofVec2f posOfForce;
-    posOfForce.set(p.position.x,p.position.y);
-    
-    ofVec2f diff = position - posOfForce;
-    float length = diff.length();
-    
-    bool bAmCloseEnough = true;
-    if (radius > 0){
-        if (length > radius){
-            bAmCloseEnough = false;
-        }
-    }
-    
-    if (bAmCloseEnough == true){
-        float pct = 1 - (length / radius);
-        diff.normalize();
-        force.x = force.x + diff.y * scale * pct;
-        force.y = force.y - diff.x * scale * pct;
-        p.force.x = p.force.x - diff.y * scale * pct;
-        p.force.y = p.force.y + diff.x * scale * pct;
-        
-    }
-}
-

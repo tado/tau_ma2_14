@@ -34,10 +34,7 @@ public:
     // 引きつけあう力
     void addAttractionForce(float x, float y, float radius, float scale);
     void addAttractionForce(Particle &p, float radius, float scale);
-    
-    // 時計回りにはたらく力
-    void addCounterClockwiseForce(Particle &p, float radius, float scale);
-    
+      
     // 位置ベクトルの配列
     ofVec2f position;
     // 速度ベクトルの配列

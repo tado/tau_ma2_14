@@ -45,6 +45,8 @@ void ofApp::update(){
             // マウスの位置に引きつけられる力
             particles[i].addRepulsionForce(mouseX, mouseY, 200, 1.0);
         }
+
+        // パーティクル同士の反発する力
 		for (int j = 0; j < i; j++){
 			particles[i].addRepulsionForce(particles[j], 50, 0.1);
 		}
