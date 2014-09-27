@@ -114,17 +114,23 @@ void Particle::draw(){
 
 // 反発する力
 void Particle::addRepulsionForce(float x, float y, float radius, float scale){
+    // 力の中心点を設定
     ofVec2f posOfForce;
     posOfForce.set(x,y);
+    // パーティクルと力の中心点との距離を計算
     ofVec2f diff = position - posOfForce;
     float length = diff.length();
+    // 力が働く範囲かどうか判定する変数
     bool bAmCloseEnough = true;
+    // もし設定した半径より外側だったら、計算しない
     if (radius > 0){
         if (length > radius){
             bAmCloseEnough = false;
         }
     }
+    // 設定した半径の内側だったら
     if (bAmCloseEnough == true){
+        // 距離から点にかかる力ベクトルを計算
         float pct = 1 - (length / radius);
         diff.normalize();
         force.x = force.x + diff.x * scale * pct;
@@ -132,22 +138,31 @@ void Particle::addRepulsionForce(float x, float y, float radius, float scale){
     }
 }
 
+// 反発する力 - Particle版
 void Particle::addRepulsionForce(Particle &p, float radius, float scale){
+    // 力の中心点を設定
     ofVec2f posOfForce;
+    // Particleへの参照から座標を取得、力の中心に設定
     posOfForce.set(p.position.x,p.position.y);
-    ofVec2f diff	= position - posOfForce;
-    float length	= diff.length();
+    // パーティクルと力の中心点との距離を計算
+    ofVec2f diff = position - posOfForce;
+    float length = diff.length();
+    // 力が働く範囲かどうか判定する変数
     bool bAmCloseEnough = true;
+    // もし設定した半径より外側だったら、計算しない
     if (radius > 0){
         if (length > radius){
             bAmCloseEnough = false;
         }
     }
+    // 設定した半径の内側だったら
     if (bAmCloseEnough == true){
+        // 距離から点にかかる力ベクトルを計算
         float pct = 1 - (length / radius);
         diff.normalize();
         force.x = force.x + diff.x * scale * pct;
         force.y = force.y + diff.y * scale * pct;
+        // 参照したパーティクルの力を計算して更新
         p.force.x = p.force.x - diff.x * scale * pct;
         p.force.y = p.force.y - diff.y * scale * pct;
     }
@@ -155,17 +170,23 @@ void Particle::addRepulsionForce(Particle &p, float radius, float scale){
 
 // 引き付けあう力
 void Particle::addAttractionForce(float x, float y, float radius, float scale){
+    // 力の中心点を設定
     ofVec2f posOfForce;
     posOfForce.set(x,y);
+    // パーティクルと力の中心点との距離を計算
     ofVec2f diff = position - posOfForce;
     float length = diff.length();
+    // 力が働く範囲かどうか判定する変数
     bool bAmCloseEnough = true;
+    // もし設定した半径より外側だったら、計算しない
     if (radius > 0){
         if (length > radius){
             bAmCloseEnough = false;
         }
     }
+    // 設定した半径の内側だったら
     if (bAmCloseEnough == true){
+        // 距離から点にかかる力ベクトルを計算
         float pct = 1 - (length / radius);
         diff.normalize();
         force.x = force.x - diff.x * scale * pct;
@@ -173,22 +194,31 @@ void Particle::addAttractionForce(float x, float y, float radius, float scale){
     }
 }
 
+// 引き付けあう力 - Particle版
 void Particle::addAttractionForce(Particle &p, float radius, float scale){
+    // 力の中心点を設定
     ofVec2f posOfForce;
+    // Particleへの参照から座標を取得、力の中心に設定
     posOfForce.set(p.position.x, p.position.y);
-    ofVec2f diff	= position - posOfForce;
-    float length	= diff.length();
+    // パーティクルと力の中心点との距離を計算
+    ofVec2f diff = position - posOfForce;
+    float length = diff.length();
+    // 力が働く範囲かどうか判定する変数
     bool bAmCloseEnough = true;
+    // もし設定した半径より外側だったら、計算しない
     if (radius > 0){
         if (length > radius){
             bAmCloseEnough = false;
         }
     }
+    // 設定した半径の内側だったら
     if (bAmCloseEnough == true){
+        // 距離から点にかかる力ベクトルを計算
         float pct = 1 - (length / radius);
         diff.normalize();
         force.x = force.x - diff.x * scale * pct;
         force.y = force.y - diff.y * scale * pct;
+        // 参照したパーティクルの力を計算して更新
         p.force.x = p.force.x + diff.x * scale * pct;
         p.force.y = p.force.y + diff.y * scale * pct;
     }

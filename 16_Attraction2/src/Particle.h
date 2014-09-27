@@ -29,10 +29,11 @@ public:
     
     // 反発する力
     void addRepulsionForce(float x, float y, float radius, float scale);
+    // 反発する力 - Particle版
     void addRepulsionForce(Particle &p, float radius, float scale);
-
     // 引きつけあう力
     void addAttractionForce(float x, float y, float radius, float scale);
+    // 引き付けあう力 - Particle版
     void addAttractionForce(Particle &p, float radius, float scale);
       
     // 位置ベクトルの配列

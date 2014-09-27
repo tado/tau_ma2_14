@@ -29,12 +29,9 @@ public:
     
     // 反発する力
     void addRepulsionForce(float x, float y, float radius, float scale);
-    void addRepulsionForce(Particle &p, float radius, float scale);
-
     // 引きつけあう力
     void addAttractionForce(float x, float y, float radius, float scale);
-    void addAttractionForce(Particle &p, float radius, float scale);
-      
+    
     // 位置ベクトルの配列
     ofVec2f position;
     // 速度ベクトルの配列

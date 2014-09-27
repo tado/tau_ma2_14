@@ -119,8 +119,8 @@ void Particle::addRepulsionForce(float x, float y, float radius, float scale){
     posOfForce.set(x,y);
     // パーティクルと力の中心点との距離を計算
     ofVec2f diff = position - posOfForce;
-    // 力が働く範囲かどうか判定する変数
     float length = diff.length();
+    // 力が働く範囲かどうか判定する変数
     bool bAmCloseEnough = true;
     // もし設定した半径より外側だったら、計算しない
     if (radius > 0){
@@ -135,27 +135,6 @@ void Particle::addRepulsionForce(float x, float y, float radius, float scale){
         diff.normalize();
         force.x = force.x + diff.x * scale * pct;
         force.y = force.y + diff.y * scale * pct;
-    }
-}
-
-void Particle::addRepulsionForce(Particle &p, float radius, float scale){
-    ofVec2f posOfForce;
-    posOfForce.set(p.position.x,p.position.y);
-    ofVec2f diff	= position - posOfForce;
-    float length	= diff.length();
-    bool bAmCloseEnough = true;
-    if (radius > 0){
-        if (length > radius){
-            bAmCloseEnough = false;
-        }
-    }
-    if (bAmCloseEnough == true){
-        float pct = 1 - (length / radius);
-        diff.normalize();
-        force.x = force.x + diff.x * scale * pct;
-        force.y = force.y + diff.y * scale * pct;
-        p.force.x = p.force.x - diff.x * scale * pct;
-        p.force.y = p.force.y - diff.y * scale * pct;
     }
 }
 
@@ -182,26 +161,5 @@ void Particle::addAttractionForce(float x, float y, float radius, float scale){
         diff.normalize();
         force.x = force.x - diff.x * scale * pct;
         force.y = force.y - diff.y * scale * pct;
-    }
-}
-
-void Particle::addAttractionForce(Particle &p, float radius, float scale){
-    ofVec2f posOfForce;
-    posOfForce.set(p.position.x, p.position.y);
-    ofVec2f diff	= position - posOfForce;
-    float length	= diff.length();
-    bool bAmCloseEnough = true;
-    if (radius > 0){
-        if (length > radius){
-            bAmCloseEnough = false;
-        }
-    }
-    if (bAmCloseEnough == true){
-        float pct = 1 - (length / radius);
-        diff.normalize();
-        force.x = force.x - diff.x * scale * pct;
-        force.y = force.y - diff.y * scale * pct;
-        p.force.x = p.force.x + diff.x * scale * pct;
-        p.force.y = p.force.y + diff.y * scale * pct;
     }
 }
