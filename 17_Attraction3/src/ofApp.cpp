@@ -56,16 +56,14 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    if (key == 'c') {
-        particles.clear();
-        for (int i = 0; i < NUM; i++) {
-            Particle p;
-            p.friction = 0.001;
-            p.mass = ofRandom(3.0);
-            p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())),
-                    ofVec2f(0, 0));
-            particles.push_back(p);
-        }
+    particles.clear();
+    for (int i = 0; i < NUM; i++) {
+        Particle p;
+        p.friction = 0.001;
+        p.mass = ofRandom(3.0);
+        p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())),
+                ofVec2f(0, 0));
+        particles.push_back(p);
     }
 }
 
