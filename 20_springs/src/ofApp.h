@@ -22,7 +22,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 	
-	vector<Spring> springs;
-	vector<Particle> particles;
+	vector<Spring> springs;     // ばねの配列
+	vector<Particle> particles; // パーティクルの配列
 };
 
