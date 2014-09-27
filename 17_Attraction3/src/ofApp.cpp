@@ -7,16 +7,12 @@ void ofApp::setup(){
     ofBackground(0);
     ofSetBackgroundAuto(false);
     
-    // メッシュを点で描画
-    mesh.setMode(OF_PRIMITIVE_POINTS);
-    glEnable(GL_POINT_SMOOTH);
-    glPointSize(2.0);
-    
     for (int i = 0; i < NUM; i++) {
         Particle p;
-        p.friction = 0.0005;
+        p.friction = 0.001;
+        p.mass = ofRandom(3.0);
         p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())),
-                ofVec2f(ofRandom(-1, 1), ofRandom(-1, 1)));
+                ofVec2f(0, 0));
         particles.push_back(p);
     }
 }
@@ -25,14 +21,12 @@ void ofApp::setup(){
 void ofApp::update(){
     for (int i = 0; i < particles.size(); i++){
         particles[i].resetForce();
-        if (atraction) {
-            particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth(), 0.1);
-        }
-        // パーティクル同士の反発する力
+        // パーティクル同士の引き付けあう力
         for (int j = 0; j < i; j++){
-            particles[i].addAttractionForce(particles[j], 120.0, 0.001);
+            // 2つの点の質量から、引力の強さを計算
+            float strength = particles[j].mass * particles[i].mass * 0.001;
+            particles[i].addAttractionForce(particles[j], 200, strength);
         }
-        
         particles[i].update();
         particles[i].throughOfWalls();
     }
@@ -44,21 +38,11 @@ void ofApp::draw(){
     ofSetColor(0, 15);
     ofRect(0, 0, ofGetWidth(), ofGetHeight());
     
-    // メッシュを点で描く
-    mesh.clear();
+    // パーティクルを円で描く
     ofSetColor(255);
     for (int i = 0; i < particles.size(); i++) {
-        mesh.addVertex(ofVec3f(particles[i].position.x, particles[i].position.y, 0));
+        ofCircle(particles[i].position.x, particles[i].position.y, particles[i].mass);
     }
-    mesh.draw();
-    
-    // 重力の点を描く
-    if (atraction) {
-        ofSetColor(255, 0, 0);
-    } else {
-        ofSetColor(0, 255, 255);
-    }
-    ofCircle(mouseX, mouseY, 4);
     
     //文字の背景
     ofSetColor(0, 127);
@@ -76,9 +60,10 @@ void ofApp::keyPressed(int key){
         particles.clear();
         for (int i = 0; i < NUM; i++) {
             Particle p;
-            p.friction = 0.0005;
+            p.friction = 0.001;
+            p.mass = ofRandom(3.0);
             p.setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())),
-                    ofVec2f(ofRandom(-1, 1), ofRandom(-1, 1)));
+                    ofVec2f(0, 0));
             particles.push_back(p);
         }
     }
@@ -96,17 +81,17 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-    atraction = true;
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    atraction = false;
+    
 }
 
 //--------------------------------------------------------------
