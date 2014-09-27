@@ -47,4 +47,6 @@ public:
     float radius;
     // 固定するかどうか
     bool bFixed;
+    // パーティクルの質量
+    float mass;
 };

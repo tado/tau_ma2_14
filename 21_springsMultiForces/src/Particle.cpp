@@ -3,6 +3,7 @@
 Particle::Particle(){
     radius = 5.0;
     friction = 0.01;
+    mass = 1.0;
     bFixed = false;
 }
 
@@ -26,7 +27,7 @@ void Particle::resetForce(){
 
 // 力を加える
 void Particle::addForce(ofVec2f _force){
-    force += _force;
+    force += _force / mass;
 }
 void Particle::addForce(float forceX, float forceY){
     force += ofVec2f(forceX, forceY);

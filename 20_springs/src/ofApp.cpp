@@ -21,8 +21,8 @@ void ofApp::setup(){
 	//全ての配列を順番にspringで接続していく
 	for (int i = 0; i < (particles.size()-1); i++){
 		Spring mySpring;
-		mySpring.distance = 20;
-		mySpring.springiness = 0.2;
+		mySpring.distance = 10;
+		mySpring.springiness = 0.1;
 		mySpring.particleA = &(particles[i]);
 		mySpring.particleB = &(particles[(i+1) % particles.size()]);
 		springs.push_back(mySpring);
