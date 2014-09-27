@@ -23,8 +23,9 @@ void ofApp::update(){
         particles[i].resetForce();
         // パーティクル同士の引き付けあう力
         for (int j = 0; j < i; j++){
-            // 2つの点の質量から、引力の強さを計算
+            // 引力の強さは、2つの物体の質量の積に比例する
             float strength = particles[j].mass * particles[i].mass * 0.001;
+            // 質量を加味した力を引力に加える
             particles[i].addAttractionForce(particles[j], 200, strength);
         }
         particles[i].update();
