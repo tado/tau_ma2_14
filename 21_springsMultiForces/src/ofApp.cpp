@@ -85,8 +85,15 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     // スペースキーでリセット
     if (key == ' ') {
-        for (int i = 0; i < particles.size(); i++){
-            particles[i].setup(ofVec2f(ofRandom(ofGetWidth()), ofRandom(ofGetHeight())), ofVec2f(0, 0));
+        particles.clear();
+        for (int i = 0; i < 200; i++){
+            Particle myParticle;
+            myParticle.friction = 0.02;
+            myParticle.radius = 2;
+            float x = ofGetWidth()/2 + 100 * cos ( (i / 200.0) * TWO_PI);
+            float y = ofGetHeight()/2 + 100 * sin ( (i / 200.0) * TWO_PI);
+            myParticle.setup(ofVec2f(x, y), ofVec2f(0, 0));
+            particles.push_back(myParticle);
         }
     }
 }
