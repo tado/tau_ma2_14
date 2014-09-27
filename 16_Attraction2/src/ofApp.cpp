@@ -24,16 +24,19 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     for (int i = 0; i < particles.size(); i++){
+        // 力をリセット
         particles[i].resetForce();
-        if (atraction) {
-            particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth(), 0.1);
-        }
         // パーティクル同士の反発する力
         for (int j = 0; j < i; j++){
             particles[i].addAttractionForce(particles[j], 120.0, 0.001);
         }
-        
+        // マウスをクリックした点に引力を加える
+        if (atraction) {
+            particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth(), 0.1);
+        }
+        // 力と位置の更新
         particles[i].update();
+        // 壁の端にきたら、反対側へ
         particles[i].throughOfWalls();
     }
 }
