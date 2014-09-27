@@ -1,34 +1,32 @@
-#pragma once // インクルードガード（コンパイルの際に一度しか読みこまれないように）
-#include "ofMain.h" // openFrameworksの機能を使えるように
+#pragma once
+#include "ofMain.h"
 
 class Particle {
-    
-public: // 外部に公開する領域
-    
-    // ------- Method（手続）---------------------------------------------
-    
-    // 更新
-    void update();
-    // 描画
-    void draw();
+
+public:
+    //コンストラクタ
+    Particle();
     // 初期設定
-    void setInit(ofVec2f initPos);
+    void setup(ofVec2f position, ofVec2f velocity);
+    void setup(float positionX, float positionY, float velocityX, float velocityY);
     // 力をリセット
     void resetForce();
     // 力を加える
     void addForce(ofVec2f force);
+    void addForce(float forceX, float forceY);
     // 力を更新
     void updateForce();
     // 位置の更新
     void updatePos();
+    // 更新(位置と力)
+    void update();
     // 画面からはみ出たらバウンドさせる
-    void checkBounds(float xmin, float ymin, float xmax, float ymax);
-    // 位置を枠内に収める
-    void constrain(float xmin, float ymin, float xmax, float ymax);
-    
-    
-    // ------- Property（属性）--------------------------------------------
-
+    void bounceOffWalls();
+    // 画面からはみ出たら反対側から出現
+    void throughOfWalls();
+    // 描画
+    void draw();
+      
     // 位置ベクトルの配列
     ofVec2f position;
     // 速度ベクトルの配列
@@ -37,6 +35,10 @@ public: // 外部に公開する領域
     ofVec2f force;
     // 摩擦係数
     float friction;
-    // 重力
-    ofVec2f gravity;
+    // パーティクルの半径
+    float radius;
+    // 固定するかどうか
+    bool bFixed;
+    // パーティクルの質量
+    float mass;
 };

@@ -1,23 +1,23 @@
 #include "Particle.h"
 
-// 更新
-void Particle::update(){
-    resetForce();
-    addForce(gravity);
-    updateForce();
-    updatePos();
+Particle::Particle(){
+    radius = 5.0;
+    friction = 0.01;
+    mass = 1.0;
+    bFixed = false;
 }
 
-// 描画
-void Particle::draw(){
-    ofCircle(position, 2);
+void Particle::setup(ofVec2f _position, ofVec2f _velocity){
+    // 位置を設定
+    position = _position;
+    // 初期速度を設定
+    velocity = _velocity;
 }
-
-// 初期設定
-void Particle::setInit(ofVec2f initPos){
-    position.x = initPos.x;
-    position.y = initPos.y;
-    force.set(0, 0);
+void Particle::setup(float positionX, float positionY, float velocityX, float velocityY){
+    // 位置を設定
+    position = ofVec2f(positionX, positionY);
+    // 初期速度を設定
+    velocity = ofVec2f(velocityX, velocityY);
 }
 
 // 力をリセット
@@ -27,42 +27,87 @@ void Particle::resetForce(){
 
 // 力を加える
 void Particle::addForce(ofVec2f _force){
-    force += _force;
+    force += _force / mass;
+}
+void Particle::addForce(float forceX, float forceY){
+    force += ofVec2f(forceX, forceY);
 }
 
-// 力を更新
+// 摩擦力の更新
 void Particle::updateForce(){
     force -= velocity * friction;
 }
 
 // 位置の更新
 void Particle::updatePos(){
-    velocity += force;
-    position += velocity;
+    if (!bFixed) {
+        velocity += force;
+        position += velocity;
+    }
 }
 
-// 画面からはみ出たらバウンドさせる
-void Particle::checkBounds(float xmin, float ymin, float xmax, float ymax){
-    if (position.x < xmin || position.x > xmax) {
+// 力の更新と座標の更新をupdateとしてまとめる
+void Particle::update(){
+    updateForce();
+    updatePos();
+}
+
+
+// 画面の端でバウンドする(改定版)
+void Particle::bounceOffWalls(){
+    bool bDampedOnCollision = false;
+    bool bDidICollide = false;
+    
+    float minx = 0;
+    float miny = 0;
+    float maxx = ofGetWidth();
+    float maxy = ofGetHeight();
+    
+    if (position.x > maxx){
+        position.x = maxx;
         velocity.x *= -1;
+        bDidICollide = true;
+    } else if (position.x < minx){
+        position.x = minx;
+        velocity.x *= -1;
+        bDidICollide = true;
     }
-    if (position.y < ymin || position.y > ymax) {
+    
+    if (position.y > maxy){
+        position.y = maxy;
         velocity.y *= -1;
+        bDidICollide = true;
+    } else if (position.y < miny){
+        position.y = miny;
+        velocity.y *= -1;
+        bDidICollide = true;
+    }
+    
+    if (bDidICollide == true && bDampedOnCollision == true){
+        velocity *= 0.3;
     }
 }
 
-// 位置を枠内に収める
-void Particle::constrain(float xmin, float ymin, float xmax, float ymax){
-    if (position.x < xmin) {
-        position.x = xmin + (xmin - position.x);
+void Particle::throughOfWalls(){
+    float minx = 0;
+    float miny = 0;
+    float maxx = ofGetWidth();
+    float maxy = ofGetHeight();
+    if (position.x < minx) {
+        position.x = maxx;
     }
-    if (position.x > xmax) {
-        position.x = xmax - (position.x - xmax);
+    if (position.y < miny) {
+        position.y = maxy;
     }
-    if (position.y < ymin) {
-        position.y = ymin + (ymin - position.y);
+    if (position.x > maxx) {
+        position.x = minx;
     }
-    if (position.y > ymax) {
-        position.y = ymax - (position.y - ymax);
+    if (position.y > maxy) {
+        position.y = miny;
     }
+}
+
+// 描画
+void Particle::draw(){
+    ofCircle(position, radius);
 }
