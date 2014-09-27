@@ -4,9 +4,9 @@
 
 class Mover{
 public:
-    void setParticle(Particle p);
-    void setParticleRef(Particle &p);
-    void setParticlePtr(Particle *p);
+    void setParticle(Particle p);       // 値渡し
+    void setParticleRef(Particle &p);   // 参照渡し
+    void setParticlePtr(Particle *p);   // ポインタ渡し
     
     void update();
     
