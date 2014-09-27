@@ -20,12 +20,18 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    // パーティクルの数だけ計算
     for (int i = 0; i < particles.size(); i++){
+        // 力をリセット
         particles[i].resetForce();
+        // もし引力がはたらいていたら
         if (atraction) {
+            // マウスの位置に引力を加える
             particles[i].addAttractionForce(mouseX, mouseY, ofGetWidth(), 0.1);
         }
+        // パーティクル更新
         particles[i].update();
+        // 画面の端にきたら反対側へ
         particles[i].throughOfWalls();
     }
 }
