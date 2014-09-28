@@ -6,10 +6,10 @@ void Mover::setParticle(Particle p){
     particleA.velocity = ofVec2f(10.0, 0);
 }
 
-// C: オブジェクトのポインタ渡し
+// B: オブジェクトのポインタ渡し
 void Mover::setParticlePtr(Particle *p){
-    particleC = p;
-    particleC->velocity = ofVec2f(10.0, 0);
+    particleB = p;
+    particleB->velocity = ofVec2f(10.0, 0);
 }
 
 // それぞれのオブジェクトを更新
@@ -17,9 +17,6 @@ void Mover::update(){
     particleA.resetForce();
     particleA.update();
 
-    particleB.resetForce();
-    particleB.update();
-
-    particleC->resetForce();
-    particleC->update();
+    particleB->resetForce();
+    particleB->update();
 }

@@ -5,15 +5,10 @@
 class Mover{
     
 public:
-    // 参照渡しは、コンストラクタのイニシャライザで
-    Mover(Particle &particleB):particleB(particleB){};
-
     void setParticle(Particle p);       // 値渡し
     void setParticlePtr(Particle *p);   // ポインタ渡し
-    
     void update();
     
-    Particle particleA;
-    Particle &particleB;
-    Particle *particleC;
+    Particle particleA;     // 値渡しされるParticle
+    Particle *particleB;    // ポインタ渡しされるParticle
 };

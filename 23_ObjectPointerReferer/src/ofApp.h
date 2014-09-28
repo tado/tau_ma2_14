@@ -21,5 +21,5 @@ public:
     void gotMessage(ofMessage msg);
     
     Mover *mover;
-    Particle particleA, particleB, particleC;
+    Particle particleA, particleB;
 };

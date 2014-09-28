@@ -6,19 +6,16 @@ void ofApp::setup(){
     ofBackground(0);
 
     // パーティクルの初期位置を設定
-    particleA.position = ofVec2f(10, 10);
-    particleB.position = ofVec2f(10, 110);
-    particleB.velocity = ofVec2f(10, 0);
-    particleC.position = ofVec2f(10, 210);
-    
-    // B:参照渡しは、コンストラクタで渡す
-    mover = new Mover(particleB);
+    particleA.position = ofVec2f(10, 100);
+    particleB.position = ofVec2f(10, 200);
+
+    // Moverのインスタンス化
+    mover = new Mover();
     
     // A: オブジェクトの値渡し
     mover->setParticle(particleA);
-    
-    // C: オブジェクトのポインタ渡し
-    mover->setParticlePtr(&particleC);
+    // B: オブジェクトのポインタ渡し
+    mover->setParticlePtr(&particleB);
 }
 
 //--------------------------------------------------------------
@@ -31,12 +28,9 @@ void ofApp::draw(){
     // A: 値渡しの描画
     ofSetColor(ofColor::red);
     particleA.draw();
-    // B: 参照渡しの描画
+    // B: ポインタ渡しの描画
     ofSetColor(ofColor::blue);
     particleB.draw();
-    // C: ポインタ渡しの描画
-    ofSetColor(ofColor::yellow);
-    particleC.draw();
 }
 
 //--------------------------------------------------------------
