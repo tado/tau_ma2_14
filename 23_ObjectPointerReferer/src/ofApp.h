@@ -20,6 +20,6 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    Mover mover;
+    Mover *mover;
     Particle particleA, particleB, particleC;
 };

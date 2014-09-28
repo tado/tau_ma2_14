@@ -6,12 +6,6 @@ void Mover::setParticle(Particle p){
     particleA.velocity = ofVec2f(10.0, 0);
 }
 
-// B: オブジェクトの参照渡し
-void Mover::setParticleRef(Particle &p){
-    particleB = p;
-    particleB.velocity = ofVec2f(10.0, 0);
-}
-
 // C: オブジェクトのポインタ渡し
 void Mover::setParticlePtr(Particle *p){
     particleC = p;

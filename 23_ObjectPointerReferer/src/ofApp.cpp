@@ -8,19 +8,22 @@ void ofApp::setup(){
     // パーティクルの初期位置を設定
     particleA.position = ofVec2f(10, 10);
     particleB.position = ofVec2f(10, 110);
+    particleB.velocity = ofVec2f(10, 0);
     particleC.position = ofVec2f(10, 210);
     
+    // B:参照渡しは、コンストラクタで渡す
+    mover = new Mover(particleB);
+    
     // A: オブジェクトの値渡し
-    mover.setParticle(particleA);
-    // B: オブジェクトの参照渡し
-    mover.setParticleRef(particleB);
+    mover->setParticle(particleA);
+    
     // C: オブジェクトのポインタ渡し
-    mover.setParticlePtr(&particleC);
+    mover->setParticlePtr(&particleC);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    mover.update();
+    mover->update();
 }
 
 //--------------------------------------------------------------
