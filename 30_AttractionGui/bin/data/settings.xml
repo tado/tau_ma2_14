@@ -1,0 +1,9 @@
+<group>
+	<particle_number>79000</particle_number>
+	<particle_size>1.455</particle_size>
+	<friction>0.0075</friction>
+	<attraction>0.295</attraction>
+	<bg_color>0, 0, 135, 255</bg_color>
+	<fg_color>255, 255, 119, 255</fg_color>
+<group/>
+</group>
