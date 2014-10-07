@@ -30,9 +30,7 @@ public:
     // 位置の更新
     void updatePos();
     // 画面からはみ出たらバウンドさせる
-    void checkBounds(float xmin, float ymin, float xmax, float ymax);
-    // 位置を枠内に収める
-    void constrain(float xmin, float ymin, float xmax, float ymax);
+    void bounceOffWalls();
     
     // 描画する円の数を指定
     static const int CIRCLE_NUM = 10000;

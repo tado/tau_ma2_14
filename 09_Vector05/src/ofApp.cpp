@@ -17,21 +17,14 @@ void ofApp::setup(){
 void ofApp::update(){
     // 力をリセット
     resetForce();
-    
     // 重力を加える
     addForce(ofVec2f(0, 0.25));
-    
     // 力の更新 (摩擦)
     updateForce();
-    
     // 円の座標を全て更新
     updatePos();
-    
     // 画面からはみ出たらバウンドさせる
-    checkBounds(0, 0, ofGetWidth(), ofGetHeight());
-    
-    // 枠内に収める
-    constrain(0, 0, ofGetWidth(), ofGetHeight());
+    bounceOffWalls();
 }
 
 //--------------------------------------------------------------
@@ -92,29 +85,28 @@ void ofApp::updatePos(){
 }
 
 //--------------------------------------------------------------
-void ofApp::constrain(float xmin, float ymin, float xmax, float ymax){
-    // 枠内に収める
+// 画面の端でバウンドする(改定版)
+void ofApp::bounceOffWalls(){
+    float minx = 0;
+    float miny = 0;
+    float maxx = ofGetWidth();
+    float maxy = ofGetHeight();
     for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (position[i].x < xmin) {
-            position[i].x = xmin + (xmin - position[i].x);
-        }
-        if (position[i].x > xmax) {
-            position[i].x = xmax - (position[i].x - xmax);
-        }
-        if (position[i].y > ymax) {
-            position[i].y = ymax - (position[i].y - ymax);
-        }
-    }
-}
-
-//--------------------------------------------------------------
-void ofApp::checkBounds(float xmin, float ymin, float xmax, float ymax){
-    // 画面からはみ出たらバウンドさせる
-    for (int i = 0; i < CIRCLE_NUM; i++) {
-        if (position[i].x < xmin || position[i].x > xmax) {
+        if (position[i].x > maxx){
+            position[i].x = maxx;
             velocity[i].x *= -1;
         }
-        if (position[i].y > ymax) {
+        if (position[i].x < minx){
+            position[i].x = minx;
+            velocity[i].x *= -1;
+        }
+        
+        if (position[i].y > maxy){
+            position[i].y = maxy;
+            velocity[i].y *= -1;
+        }
+        if (position[i].y < miny){
+            position[i].y = miny;
             velocity[i].y *= -1;
         }
     }
