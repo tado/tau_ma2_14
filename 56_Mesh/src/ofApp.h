@@ -19,6 +19,6 @@ public:
     void gotMessage(ofMessage msg);
     
 	ofEasyCam cam; // カメラ
-	ofMesh mesh; // 3Dメッシュ
+	ofVboMesh mesh; // 3Dメッシュ（VBO）
 	int w, h; // メッシュの幅と高さ
 };

@@ -5,13 +5,15 @@ void ofApp::setup(){
     // 画面の設定
     ofBackground(0);
     ofEnableDepthTest();
-    ofEnableBlendMode(OF_BLENDMODE_ADD);
 
     cam.setDistance(100);
         
     // メッシュの幅と高さ
     w = 200;
     h = 200;
+    
+    // メッシュの描画方法指定
+    mesh.setMode(OF_PRIMITIVE_POINTS);
     
     // 頂点の色を初期化
     for (int i = 0; i < w; i++) {
@@ -45,8 +47,7 @@ void ofApp::draw(){
     
     // 頂点の位置をドットで表示
     glPointSize(2.0);
-    glEnable(GL_POINT_SMOOTH);
-    mesh.drawVertices();
+    mesh.draw();
     
     cam.end(); // カメラ終了
     

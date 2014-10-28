@@ -11,43 +11,61 @@ void ofApp::setup(){
     ofEnableDepthTest();
     ofEnableBlendMode(OF_BLENDMODE_ADD);
     
-    cam.setDistance(100);
+    cam.setDistance(400);
     
-    // 頂点情報を初期化
-    for (int i = 0; i < WIDTH; i++) {
-        for (int j = 0; j < HEIGHT; j++) {
-            myVerts[j * WIDTH + i].set(i - WIDTH/2, j - HEIGHT/2, 0);
-            myColor[j * WIDTH + i].set(0.5, 0.8, 1.0, 1.0);
-        }
-    }
+    // カメラ映像をキャプチャ
+    myVideo.initGrabber(640, 480);
     
-    // 頂点バッファに位置と色の情報を設定
-    myVbo.setVertexData(myVerts, NUM_PARTICLES, GL_DYNAMIC_DRAW);
-    myVbo.setColorData(myColor, NUM_PARTICLES, GL_DYNAMIC_DRAW);
+    //メッシュの描画モード設定
+    mesh.setMode(OF_PRIMITIVE_POINTS);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    // 頂点の座標を更新
-    for (int i = 0; i < WIDTH; i++) {
-        for (int j = 0; j < HEIGHT; j++) {
-            float x = sin(i * 0.1 + ofGetElapsedTimef()) * 10.0;
-            float y = sin(j * 0.15 + ofGetElapsedTimef()) * 10.0;
-            float z = x + y;
-            myVerts[j * WIDTH + i] = ofVec3f(i - WIDTH/2, j - HEIGHT/2, z);
+    // カメラからの映像を更新
+    myVideo.update();
+    
+    // もしカメラのフレームが更新されていたら
+    if (myVideo.isFrameNew()) {
+        
+        // メッシュを初期化
+        mesh.clear();
+        
+        // カメラの映像のピクセル情報を抽出
+        unsigned char * pixels = myVideo.getPixels();
+        
+        // ピクセルごとに処理
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                
+                // ピクセルノRGB値を取得
+                float r = (float)pixels[j * myVideo.width * 3 + i * 3] / 255.0;
+                float g = (float)pixels[j * myVideo.width * 3 + i * 3 + 1] / 255.0;
+                float b = (float)pixels[j * myVideo.width * 3 + i * 3 + 2] / 255.0;
+                
+                // RGBから明度を算出
+                float brightness = (r + g + b) / 3.0f;
+                
+                // 明度から頂点の位置を設定
+                ofVec3f vert = ofVec3f(i - WIDTH/2, j - HEIGHT/2, brightness * 255.0);
+                mesh.addVertex(vert);
+                
+                // 頂点の色はカメラのピクセルの値をそのまま使用
+                ofFloatColor color = ofFloatColor(r, g, b, 0.8);
+                mesh.addColor(color);
+            }
         }
     }
-    
-    // 頂点バッファの頂点の座標情報を更新
-    myVbo.updateVertexData(myVerts, NUM_PARTICLES);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    // VBOの頂点を描画
+    // VBOを描画
     cam.begin();
-    glPointSize(2);
-    myVbo.draw(GL_POINTS, 0, NUM_PARTICLES);
+    ofScale(1, -1, 1);
+    glPointSize(3);
+    //myVbo.draw(GL_POINTS, 0, NUM_PARTICLES);
+    mesh.draw();
     cam.end();
     
     // ログの表示
@@ -101,6 +119,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }

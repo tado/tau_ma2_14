@@ -19,12 +19,12 @@ public:
     void gotMessage(ofMessage msg);
     
     // クラス定数
-    static const int WIDTH = 200;
-    static const int HEIGHT = 200;
+    static const int WIDTH = 640;
+    static const int HEIGHT = 480;
     static const int NUM_PARTICLES = WIDTH * HEIGHT;
     
-	ofEasyCam cam; // カメラ
-	ofVbo myVbo; // VBO
-	ofVec3f myVerts[NUM_PARTICLES]; // 頂点の座標
-	ofFloatColor myColor[NUM_PARTICLES]; // 頂点の色情報
+    ofEasyCam cam; // カメラ
+    ofLight light; // ライト
+    ofVboMesh mesh; // VBOメッシュ
+    ofVideoGrabber myVideo;	// ビデオキャプチャ
 };
