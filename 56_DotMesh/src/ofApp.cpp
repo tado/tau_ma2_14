@@ -31,7 +31,7 @@ void ofApp::update(){
     // 全ての頂点の位置を更新して頂点情報として追加
     for (int i = 0; i < w; i++) {
         for (int j = 0; j < h; j++) {
-            float x = sin(i * 0.1 + ofGetElapsedTimef())*10.0;
+            float x = sin(i * 0.1 + ofGetElapsedTimef()) * 10.0;
             float y = sin(j*0.15 + ofGetElapsedTimef()) * 10.0;
             float z = x + y;
             mesh.addVertex(ofVec3f(i - w/2, j - h/2, z));

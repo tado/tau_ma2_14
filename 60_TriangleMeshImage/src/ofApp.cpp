@@ -9,43 +9,45 @@ void ofApp::setup(){
     cam.setDistance(300);
     
     // カメラ映像をキャプチャ
-    myVideo.initGrabber(640, 480);
+    // myVideo.initGrabber(640, 480);
+    
+    myImage.loadImage("top_image.jpg");
     
     // メッシュの幅と高さ
     w = 480;
     h = 640;
     
     createMesh();
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     // カメラからの映像を更新
-    myVideo.update();
+    //myVideo.update();
     
     // もしカメラのフレームが更新されていたら
-    if (myVideo.isFrameNew()) {
-        
-        // カメラの映像のピクセル情報を抽出
-        // unsigned char * pixels = myVideo.getPixels();
-        
-        for(int y = 1; y + 1 < ySteps; y++) {
-            for(int x = 1; x + 1 < xSteps; x++) {
-                // x, y に該当する頂点番号を計算
-                int i = y * xSteps + x;
-
-                // 波を生成しZ座標に
-                float wx = sin(x * 0.1 + ofGetElapsedTimef()) * 50.0;
-                float wy = sin(y * 0.1 + ofGetElapsedTimef()) * 50.0;
-                float wz = wx + wy;
-                ofVec3f position(x * stepSize, y * stepSize, wz);
-                
-                // 頂点の位置を設定
-                mesh.setVertex(i, position);
-            }
+    // if (myVideo.isFrameNew()) {
+    
+    // カメラの映像のピクセル情報を抽出
+    // unsigned char * pixels = myVideo.getPixels();
+    
+    for(int y = 1; y + 1 < ySteps; y++) {
+        for(int x = 1; x + 1 < xSteps; x++) {
+            // x, y に該当する頂点番号を計算
+            int i = y * xSteps + x;
+            
+            // 波を生成しZ座標に
+            float wx = sin(x * 0.1 + ofGetElapsedTimef()) * 50.0;
+            float wy = sin(y * 0.1 + ofGetElapsedTimef()) * 50.0;
+            float wz = wx + wy;
+            ofVec3f position(x * stepSize, y * stepSize, wz);
+            
+            // 頂点の位置を設定
+            mesh.setVertex(i, position);
         }
     }
+    //}
 }
 
 //--------------------------------------------------------------
@@ -55,12 +57,12 @@ void ofApp::draw(){
     cam.begin(); // カメラ開始
     
     //カメラ映像をバインド
-    myVideo.getTextureReference().bind();
+    myImage.getTextureReference().bind();
     // 頂点の位置をドットで表示
     ofTranslate(-h / 2, -w / 2);
     mesh.draw();
     //カメラ映像をアンバインド
-    myVideo.getTextureReference().unbind();
+    myImage.getTextureReference().unbind();
     
     cam.end(); // カメラ終了
     
@@ -142,6 +144,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
     
 }
