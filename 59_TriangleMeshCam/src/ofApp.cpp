@@ -57,6 +57,7 @@ void ofApp::draw(){
     //カメラ映像をバインド
     myVideo.getTextureReference().bind();
     // 頂点の位置をドットで表示
+    ofRotateZ(180);
     ofTranslate(-h / 2, -w / 2);
     mesh.draw();
     //カメラ映像をアンバインド
